@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using KamenMessage.RunTime.Service.Basic.Message;
-using KamenMessage.RunTime.Service.Interface.Message;
+using KamenMessage.RunTime.Basic.Message;
+using KamenMessage.RunTime.Interface.Message;
 
-namespace KamenMessage.RunTime.Service.Basic.model
+namespace KamenMessage.RunTime.Basic.Model
 {
     public abstract class ManualModel : IModel
     {
-        private readonly List<IDisposable> _entrustDisposables = new List<IDisposable>();
+        private readonly List<IDisposable> mEntrustDisposables = new List<IDisposable>();
 
         ~ManualModel()
         {
@@ -16,7 +16,7 @@ namespace KamenMessage.RunTime.Service.Basic.model
 
         protected void EntrustDisposable(IDisposable disposable)
         {
-            _entrustDisposables.Add(disposable);
+            mEntrustDisposables.Add(disposable);
         }
 
         protected IDisposable Register<T>(Action<T> callback) where T : MessageModel
@@ -28,11 +28,11 @@ namespace KamenMessage.RunTime.Service.Basic.model
 
         public void EntrustDisposablesClear()
         {
-            foreach (IDisposable entrustDisposable in _entrustDisposables)
+            foreach (IDisposable entrustDisposable in mEntrustDisposables)
             {
                 entrustDisposable.Dispose();
             }
-            _entrustDisposables.Clear();
+            mEntrustDisposables.Clear();
         }
     }
 }

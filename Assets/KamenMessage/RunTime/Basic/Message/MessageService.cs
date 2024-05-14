@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using KamenMessage.RunTime.Service.Interface.Message;
+using KamenMessage.RunTime.Interface.Message;
 using UnityEngine;
 
-namespace KamenMessage.RunTime.Service.Basic.Message
+namespace KamenMessage.RunTime.Basic.Message
 {
     public class MessageService : MonoBehaviour, IMessageService
     {

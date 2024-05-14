@@ -1,6 +1,5 @@
-﻿using System;
-using KamenMessage.RunTime.Service.Basic.Message;
-using KamenMessage.RunTime.Service.Basic.model;
+﻿using KamenMessage.RunTime.Basic.Message;
+using KamenMessage.RunTime.Basic.Model;
 using UnityEngine;
 
 namespace KamenMessage.RunTime.Service
