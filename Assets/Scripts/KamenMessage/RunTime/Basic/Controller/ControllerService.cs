@@ -27,13 +27,16 @@ namespace KamenMessage.RunTime.Service.RunTime.Basic.Controller
                 select type).ToList())
             {
                 Type controllerType = item;
-                Type messageType = (from t in controllerType.GetInterfaces() where t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IController<>) select t.GetGenericArguments().FirstOrDefault()).FirstOrDefault();
+                var controllerInstance = Activator.CreateInstance(controllerType);
+                Type messageType = (from t in controllerType.GetInterfaces()
+                    where t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IController<>)
+                    select t.GetGenericArguments().FirstOrDefault()).FirstOrDefault();
                 MethodInfo handleMethod = controllerType.GetMethod("Handle");
                 if (!(handleMethod == null) && !(messageType == null))
                 {
                     MessageService.Instance.Register(messageType, (msg) =>
                     {
-                        handleMethod.Invoke(controllerType, new object[1] { msg });
+                        handleMethod.Invoke(controllerInstance, new object[1] {msg});
                     });
                 }
             }
